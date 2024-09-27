@@ -229,6 +229,7 @@ header nav {
   }
 }
 
+/* next button effect styles */
 .next .item.item.other_1 {
   z-index: 1;
 }
@@ -264,4 +265,38 @@ header nav {
 
 .arrows {
   z-index: 10;
+}
+
+/* prev button effect styles */
+.prev .list .item .image img,
+.prev .list .item .image figcaption {
+  animation: prevEffect 0.5s ease-in-out 1 forwards;
+}
+
+@keyframes prevEffect {
+  from {
+    transform: translateX(calc(var(--transform-from)));
+  }
+  to {
+    transform: translateX(calc(var(--transform-from) var(--w-image)));
+  }
+}
+
+.prev .list .item.active .image {
+  --transform-from: calc(var(--w-image) - 1);
+  overflow: hidden;
+}
+
+.prev .list .item.other_1 .image {
+  --transform-from: 0px;
+  z-index: 3;
+}
+
+.prev .list .item.other_2 .image {
+  --transform-from: var(--w-image);
+  z-index: 3;
+}
+
+.prev .list .item.other_2 .main-content {
+  opacity: 0;
 }
