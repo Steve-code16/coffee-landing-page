@@ -74,7 +74,7 @@ header nav {
 .carousel .list::before {
   content: "";
   position: absolute;
-  width: var(--calculate);
+  width: var(--w-image);
   height: 100%;
   top: 0;
   left: calc(100% - calc(var(--w-image) * var(--calculate)));
@@ -94,7 +94,7 @@ header nav {
   height: 300px;
   border-radius: 20px 50px 110px 230px;
   filter: blur(150px);
-  opacity: 0.6;
+  opacity: 0.4;
   z-index: 10;
   pointer-events: none;
 }
@@ -123,6 +123,8 @@ header nav {
 
 .carousel .list .item .image img {
   width: 90%;
+  height: 75%;
+  object-fit: contain;
   margin-bottom: 20px;
   filter: drop-shadow(0 150px 50px #9e0c0c55);
 }
@@ -130,9 +132,9 @@ header nav {
 .carousel .list .item .image figcaption {
   font-family: "Aboreto";
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-align: right;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   width: 70%;
 }
 
@@ -230,7 +232,7 @@ header nav {
 }
 
 /* next button effect styles */
-.next .item.item.other_1 {
+.next .item.other_1 {
   z-index: 1;
 }
 
@@ -249,16 +251,16 @@ header nav {
 }
 
 .next .item.active .image {
-  --transform-from: var(var(--w-image));
+  --transform-from: var(--w-image);
 }
 
-.next .item.item.other_1 .image {
+.next .item.other_1 .image {
   z-index: 3;
   --transform-from: 0px;
   overflow: hidden;
 }
 
-.next .item.item.other_2 .image {
+.next .item.other_2 .image {
   z-index: 3;
   --transform-from: calc(var(--w-image) * 2);
 }
@@ -278,12 +280,12 @@ header nav {
     transform: translateX(calc(var(--transform-from)));
   }
   to {
-    transform: translateX(calc(var(--transform-from) var(--w-image)));
+    transform: translateX(calc(var(--transform-from) + var(--w-image)));
   }
 }
 
 .prev .list .item.active .image {
-  --transform-from: calc(var(--w-image) - 1);
+  --transform-from: calc(var(--w-image) * -1);
   overflow: hidden;
 }
 
@@ -299,4 +301,43 @@ header nav {
 
 .prev .list .item.other_2 .main-content {
   opacity: 0;
+}
+
+/* responsive design */
+@media screen and (max-width: 1023px) {
+  :root {
+    --calculate: 1;
+    --w-image: 400px;
+  }
+
+  .carousel .list .item .main-content .content h2 {
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .carousel .list .item .image {
+    width: 100%;
+    left: 0;
+    justify-content: center;
+  }
+
+  .carousel .list .item .image img {
+    height: 60%;
+  }
+
+  .carousel .list .item .image figcaption {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+  }
+
+  .carousel .list .item .main-content .content {
+    display: none;
+  }
+
+  .arrows {
+    left: 50%;
+    justify-content: center;
+  }
 }

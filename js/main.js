@@ -1,12 +1,19 @@
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("prev");
 const carousel = document.querySelector(".carousel");
-const items = document.querySelectorAll(".carousel .list");
+const items = document.querySelectorAll(".carousel .item");
 
 const itemCount = items.length;
 let active = 1;
 let other_1 = null;
 let other_2 = null;
+
+const resetAutoPlay = () => {
+  clearInterval(autoPlay);
+  autoPlay = setInterval(() => {
+    nextBtn.click();
+  }, 5000);
+};
 
 nextBtn.onclick = () => {
   carousel.classList.remove("prev");
@@ -27,33 +34,26 @@ prevBtn.onclick = () => {
 };
 
 const changeSlider = () => {
-  let oldActiveItem = document.querySelector(".carousel .item.active");
-  if (oldActiveItem) oldActiveItem.classList.remove("active");
-
-  let oldOther_1Item = document.querySelector(".carousel .item.other_1");
-  if (oldOther_1Item) oldOther_1Item.classList.remove("other_1");
-
-  let oldOther_2Item = document.querySelector(".carousel .item.other_2");
-  if (oldOther_2Item) oldOther_2Item.classList.remove("other_2");
+  document.querySelector(".carousel .item.active")?.classList.remove("active");
+  document
+    .querySelector(".carousel .item.other_1")
+    ?.classList.remove("other_1");
+  document
+    .querySelector(".carousel .item.other_2")
+    ?.classList.remove("other_2");
 
   items.forEach((e) => {
-    e.querySelector(".image img").style.animation = "none";
-    e.querySelector(".image figcaption").style.animation = "none";
+    e.classList.remove("animate");
     void e.offsetWidth;
-    e.querySelector(".image img").style.animation = "";
-    e.querySelector(".image figcaption").style.animation = "";
+    e.classList.add("animate");
   });
 
   items[active].classList.add("active");
   items[other_1].classList.add("other_1");
   items[other_2].classList.add("other_2");
 
-  clearInterval(autoPlay);
-  setInterval(() => {
-    nextBtn.click();
-  }, 7000);
+  resetAutoPlay();
 };
-
 let autoPlay = setInterval(() => {
   nextBtn.click();
-}, 7000);
+}, 5000);
