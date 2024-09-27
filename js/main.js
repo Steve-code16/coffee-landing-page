@@ -47,4 +47,13 @@ const changeSlider = () => {
   items[active].classList.add("active");
   items[other_1].classList.add("other_1");
   items[other_2].classList.add("other_2");
+
+  clearInterval(autoPlay);
+  setInterval(() => {
+    nextBtn.click();
+  }, 7000);
 };
+
+let autoPlay = setInterval(() => {
+  nextBtn.click();
+}, 7000);
